@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitAI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eee;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#111}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#f7f7f7;padding-bottom:80px}
+header{padding:25px 20px 10px}
+h1{font-size:28px;margin:5px 0}
+h2{font-size:20px}
+.card{background:white;margin:12px 16px;padding:18px;border-radius:20px}
+.hero{background:#111;color:white}
+button{border:0;border-radius:13px;padding:13px 18px;font-weight:bold;font-size:14px}
+.primary{background:#111;color:white;width:100%}
+.hero .primary{background:white;color:#111}
+.item{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid #eee;gap:12px}
+.icon{width:55px;height:55px;border-radius:15px;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:25px}
+.item div:nth-child(2){flex:1}
+.small{font-size:12px;color:#777;margin-top:5px}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:auto;background:white;height:70px;display:flex;justify-content:space-around;border-top:1px solid #ddd}
+nav button{background:none;color:#888;font-size:11px}
+nav button.active{color:#111}
+.page{display:none}
+.page.active{display:block}
+input{padding:12px;border:1px solid #ddd;border-radius:10px;width:100%;margin:5px 0}
+.set{display:grid;grid-template-columns:1fr 70px 60px 50px;gap:6px;align-items:center;margin:8px 0}
+.set input{margin:0;text-align:center;padding:9px}
+.tag{background:#eee;border-radius:7px;padding:5px 8px;font-size:11px}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<div id="home" class="page active">
+<header>
+<div class="small">下午好</div>
+<h1>今天怎么练？</h1>
+</header>
+
+<div class="card hero">
+<div class="small" style="color:#aaa">今日训练</div>
+<h2>胸 + 三头</h2>
+<div class="small" style="color:#aaa">5个动作 · 16组 · 约55分钟</div>
+<br>
+<button class="primary" onclick="show('workout')">开始今日训练</button>
+</div>
+
+<div class="card">
+<h2>🤖 AI 教练</h2>
+<p>根据最近训练表现，今天卧推建议从 <b>70kg</b> 开始。</p>
+<p class="small">第一组达到9次且动作稳定，下一次训练可以考虑增加重量。</p>
+<button onclick="alert('AI：今天建议保持当前计划，优先完成主要动作。')">问问 AI</button>
+</div>
+
+<div class="card">
+<h2>最近进步</h2>
+<p>卧推估算 1RM：<b>80kg</b></p>
+<p>本周训练：<b>3 / 4 次</b></p>
+</div>
+</div>
+
+
+<div id="equipment" class="page">
+<header>
+<div class="small">我的健身房</div>
+<h1>器械库</h1>
+</header>
+
+<div class="card">
+<input id="search" placeholder="搜索器械" oninput="searchEquipment()">
+</div>
+
+<div class="card">
+<button class="primary" onclick="addEquipment()">＋ 添加器械</button>
+</div>
+
+<div id="equipmentList" class="card"></div>
+</div>
+
+
+<div id="workout" class="page">
+<header>
+<div class="small">今日训练</div>
+<h1>胸 + 三头</h1>
+</header>
+
+<div class="card">
+<h2>① 杠铃卧推</h2>
+<div class="small">目标：3 × 6–10 · 建议70kg · RIR 1–2</div>
+
+<div class="set">
+<b>组</b><b>重量</b><b>次数</b><b></b>
+</div>
+
+<div class="set">
+<span>第1组</span>
+<input value="70" id="w1">
+<input value="8" id="r1">
+<button onclick="finishSet(this)">完成</button>
+</div>
+
+<div class="set">
+<span>第2组</span>
+<input value="70" id="w2">
+<input value="8" id="r2">
+<button onclick="finishSet(this)">完成</button>
+</div>
+
+<div class="set">
+<span>第3组</span>
+<input value="70" id="w3">
+<input value="7" id="r3">
+<button onclick="finishSet(this)">完成</button>
+</div>
+
+<br>
+<button class="primary" onclick="finishWorkout()">完成训练</button>
+</div>
+
+<div class="card">
+<h2>② 上斜哑铃卧推</h2>
+<div class="small">3 × 8–12</div>
+</div>
+
+<div class="card">
+<h2>③ 蝴蝶机夹胸</h2>
+<div class="small">3 × 10–15</div>
+</div>
+
+<div class="card">
+<h2>④ 绳索下压</h2>
+<div class="small">3 × 10–15</div>
+</div>
+</div>
+
+
+<div id="data" class="page">
+<header>
+<div class="small">长期趋势</div>
+<h1>我的进步</h1>
+</header>
+
+<div class="card">
+<h2>卧推力量</h2>
+<p>估算 1RM</p>
+<h1>80 kg</h1>
+<p>↑ 5 kg</p>
+</div>
+
+<div class="card">
+<h2>训练次数</h2>
+<h1>23</h1>
+<p class="small">过去8周</p>
+</div>
+
+<div class="card">
+<h2>AI 周报</h2>
+<p>训练依从性良好，主要动作持续进步。</p>
+<p>目前没有必要大幅调整计划。</p>
+</div>
+</div>
+
+
+<div id="me" class="page">
+<header>
+<h1>我的</h1>
+</header>
+
+<div class="card">
+<div class="item">
+<div>训练目标</div>
+<div>增肌</div>
+</div>
+
+<div class="item">
+<div>每周训练</div>
+<div>4次</div>
+</div>
+
+<div class="item">
+<div>当前体重</div>
+<div>68.35kg</div>
+</div>
+
+<div class="item">
+<div>AI 教练</div>
+<div>已开启</div>
+</div>
+</div>
+</div>
+
+
+<nav>
+<button class="active" onclick="show('home',this)">⌂<br>首页</button>
+<button onclick="show('equipment',this)">▣<br>器械</button>
+<button onclick="show('workout',this)">◎<br>训练</button>
+<button onclick="show('data',this)">↗<br>数据</button>
+<button onclick="show('me',this)">○<br>我的</button>
+</nav>
+
+</div>
+
+<script>
+
+let equipment=[
+["🏋️","哈克深蹲机","股四头肌 + 臀"],
+["🦵","45°腿举","股四头肌 + 臀"],
+["▣","坐姿腿屈伸","股四头肌"],
+["▣","坐姿腿弯举","腘绳肌"],
+["⬇️","高位下拉","背阔肌"],
+["↔️","胸托划船","背部厚度"],
+["◉","蝴蝶机夹胸","胸大肌"]
+];
+
+function renderEquipment(){
+let box=document.getElementById("equipmentList");
+box.innerHTML="";
+
+equipment.forEach((e,i)=>{
+box.innerHTML+=`
+<div class="item" onclick="equipmentDetail(${i})">
+<div class="icon">${e[0]}</div>
+<div>
+<b>${e[1]}</b>
+<div class="small">${e[2]}</div>
+</div>
+<div>›</div>
+</div>`;
+});
+}
+
+function searchEquipment(){
+let q=document.getElementById("search").value.toLowerCase();
+let box=document.getElementById("equipmentList");
+box.innerHTML="";
+
+equipment.forEach((e,i)=>{
+if(e.join("").toLowerCase().includes(q)){
+box.innerHTML+=`
+<div class="item" onclick="equipmentDetail(${i})">
+<div class="icon">${e[0]}</div>
+<div>
+<b>${e[1]}</b>
+<div class="small">${e[2]}</div>
+</div>
+<div>›</div>
+</div>`;
+}
+});
+}
+
+function equipmentDetail(i){
+let e=equipment[i];
+
+alert(
+e[1]+"\n\n"+
+"目标肌群："+e[2]+"\n\n"+
+"动作指导：\n"+
+"1. 调整器械至合适位置\n"+
+"2. 保持身体稳定\n"+
+"3. 控制下放过程\n"+
+"4. 不要为了重量牺牲动作幅度"
+);
+}
+
+function addEquipment(){
+let name=prompt("输入器械名称");
+if(!name)return;
+
+equipment.push(["🏋️",name,"待 AI 识别"]);
+renderEquipment();
+
+alert("已加入你的健身房");
+}
+
+function finishSet(btn){
+btn.innerText="✓";
+btn.disabled=true;
+btn.style.background="#ddd";
+btn.style.color="#111";
+}
+
+function finishWorkout(){
+
+let w1=Number(document.getElementById("w1").value);
+let r1=Number(document.getElementById("r1").value);
+
+let next=w1;
+
+if(r1>=9)next=w1+2.5;
+
+alert(
+"训练完成！\n\n"+
+"AI 分析：\n"+
+"本次卧推："+w1+"kg × "+r1+"次\n\n"+
+"下一次建议："+next+"kg\n\n"+
+"继续记录训练，AI 会根据你的表现动态调整。"
+);
+
+show("data");
+}
+
+function show(id,btn){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+if(btn){
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+}else{
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+}
+}
+
+renderEquipment();
+
+</script>
+
+</body>
+</html>
