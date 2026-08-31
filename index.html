@@ -341,11 +341,141 @@ body {
     </div>
 
 </div>
-    <div id="train" class="page">
-        <div class="title">训练</div>
-        <div class="subtitle">开始你的训练</div>
+<div id="train" class="page">
+
+    <div class="subtitle">
+        TODAY'S WORKOUT
     </div>
 
+    <div class="title" style="margin-top:8px;">
+        胸 + 三头
+    </div>
+
+    <div class="subtitle">
+        4 个动作 · 12 组 · 约 50 分钟
+    </div>
+
+    <div class="card" style="
+        background:linear-gradient(145deg,#20251b,#14161a);
+        border-color:#3b422c;
+    ">
+
+        <div class="subtitle">
+            ✦ AI 今日训练
+        </div>
+
+        <h2 style="font-size:23px;margin-top:8px;">
+            今天保持渐进超负荷
+        </h2>
+
+        <p style="
+            color:#aeb2ba;
+            font-size:14px;
+            line-height:1.7;
+            margin-top:10px;
+        ">
+            根据最近训练表现，今天建议保持
+            <strong style="color:white;">70 kg</strong>
+            卧推，并控制在
+            <strong style="color:#d8ff3f;">RIR 1–2</strong>。
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="subtitle">
+            动作 1 / 4
+        </div>
+
+        <h2 style="margin-top:6px;">
+            杠铃卧推
+        </h2>
+
+        <div class="subtitle" style="margin-top:6px;">
+            3 组 · 6–10 次
+        </div>
+<div style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:18px;
+">
+
+    <div>
+        <div class="subtitle">重量</div>
+
+        <input
+            id="weight1"
+            type="number"
+            value="70"
+            style="
+                width:100%;
+                margin-top:6px;
+                padding:14px;
+                background:#0d0f12;
+                border:1px solid #30343b;
+                border-radius:12px;
+                color:white;
+                font-size:16px;
+            "
+        >
+    </div>
+
+    <div>
+        <div class="subtitle">次数</div>
+
+        <input
+            id="reps1"
+            type="number"
+            value="8"
+            style="
+                width:100%;
+                margin-top:6px;
+                padding:14px;
+                background:#0d0f12;
+                border:1px solid #30343b;
+                border-radius:12px;
+                color:white;
+                font-size:16px;
+            "
+        >
+    </div>
+
+</div>
+
+<button
+    onclick="finishSet()"
+    style="
+        width:100%;
+        margin-top:14px;
+        padding:15px;
+        border:none;
+        border-radius:14px;
+        background:#d8ff3f;
+        color:#111;
+        font-size:15px;
+        font-weight:800;
+    "
+>
+    ✓ 完成第 1 组
+</button>
+
+<div
+    id="setResult"
+    style="
+        display:none;
+        margin-top:12px;
+        padding:13px;
+        background:#20251b;
+        border-radius:12px;
+        color:#d8ff3f;
+        font-size:13px;
+    "
+></div>
+    </div>
+
+</div>
     <div id="equipment" class="page">
         <div class="title">器械库</div>
         <div class="subtitle">管理你的健身房</div>
