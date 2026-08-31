@@ -523,7 +523,25 @@ body {
 </div>
 
 <script>
+function finishSet() {
 
+    const weight = document.getElementById("weight1").value;
+    const reps = document.getElementById("reps1").value;
+
+    if (!weight || !reps) {
+        alert("请填写重量和次数");
+        return;
+    }
+
+    const result = document.getElementById("setResult");
+
+    result.style.display = "block";
+
+    result.innerHTML =
+        "✓ 第 1 组已完成<br><br>" +
+        weight + " kg × " + reps + " 次<br>" +
+        "AI：本组记录成功，可以进入下一组。";
+}
 function showPage(pageId, button) {
 
     document.querySelectorAll(".page").forEach(function(page) {
