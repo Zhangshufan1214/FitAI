@@ -2,89 +2,242 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>FitAI</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    background: #0b0c0f;
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+body{
+    background:#08090b;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,
+    "PingFang SC","Helvetica Neue",Arial,sans-serif;
 }
 
-.app {
-    width: 100%;
-    max-width: 430px;
-    min-height: 100vh;
-    margin: auto;
-    background: #0b0c0f;
-    padding-bottom: 90px;
+button,input{
+    font:inherit;
 }
 
-.page {
-    display: none;
-    padding: 24px 18px;
+button{
+    cursor:pointer;
 }
 
-.page.active {
-    display: block;
+.app{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    margin:auto;
+    background:#08090b;
+    padding-bottom:90px;
 }
 
-.title {
-    font-size: 30px;
-    font-weight: 800;
-    margin-bottom: 6px;
+.page{
+    display:none;
+    padding:24px 18px;
+    animation:fade .2s ease;
 }
 
-.subtitle {
-    color: #8f939c;
-    font-size: 14px;
+.page.active{
+    display:block;
 }
 
-.card {
-    background: #15171c;
-    border: 1px solid #292c33;
-    border-radius: 22px;
-    padding: 18px;
-    margin-top: 16px;
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 430px;
-    height: 76px;
-    background: rgba(18,20,24,0.96);
-    border-top: 1px solid #292c33;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.title{
+    font-size:30px;
+    font-weight:800;
+    letter-spacing:-1px;
 }
 
-.nav-button {
-    border: none;
-    background: none;
-    color: #777b84;
-    font-size: 11px;
+.subtitle{
+    color:#858993;
+    font-size:13px;
 }
 
-.nav-button span {
-    display: block;
-    font-size: 22px;
-    margin-bottom: 4px;
+.card{
+    background:#15171b;
+    border:1px solid #272a30;
+    border-radius:20px;
+    padding:18px;
+    margin-top:14px;
 }
 
-.nav-button.active {
-    color: #d8ff3f;
+.green{
+    color:#d8ff3f;
+}
+
+.primary{
+    width:100%;
+    border:none;
+    background:#d8ff3f;
+    color:#10120b;
+    border-radius:14px;
+    padding:14px;
+    font-weight:800;
+}
+
+.secondary{
+    width:100%;
+    border:1px solid #30333a;
+    background:#1a1c21;
+    color:#fff;
+    border-radius:14px;
+    padding:13px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:430px;
+    height:78px;
+    background:rgba(15,16,19,.96);
+    backdrop-filter:blur(20px);
+    border-top:1px solid #292c32;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:100;
+}
+
+.nav-button{
+    background:none;
+    border:none;
+    color:#6f737c;
+    font-size:11px;
+    min-width:58px;
+}
+
+.nav-button span{
+    display:block;
+    font-size:21px;
+    margin-bottom:4px;
+}
+
+.nav-button.active{
+    color:#d8ff3f;
+}
+
+.action-row{
+    display:flex;
+    gap:10px;
+}
+
+.action-row button{
+    flex:1;
+}
+
+.stat{
+    font-size:27px;
+    font-weight:800;
+    margin-top:6px;
+}
+
+.tag{
+    display:inline-block;
+    padding:5px 9px;
+    background:#20231b;
+    color:#d8ff3f;
+    border-radius:8px;
+    font-size:11px;
+}
+
+.exercise-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #272a30;
+}
+
+.exercise-row:last-child{
+    border-bottom:none;
+}
+
+input{
+    width:100%;
+    background:#0e1013;
+    border:1px solid #30343b;
+    color:#fff;
+    border-radius:12px;
+    padding:13px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#d8ff3f;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:none;
+    align-items:flex-end;
+    z-index:200;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-content{
+    width:100%;
+    max-width:430px;
+    margin:auto;
+    background:#15171b;
+    border-radius:25px 25px 0 0;
+    padding:24px 18px 35px;
+    border:1px solid #292c32;
+}
+
+.timer{
+    font-size:58px;
+    font-weight:800;
+    text-align:center;
+    margin:20px 0;
+}
+
+.progress{
+    height:7px;
+    background:#292c30;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    width:25%;
+    background:#d8ff3f;
+}
+
+.empty{
+    text-align:center;
+    padding:35px 10px;
+    color:#777b84;
 }
 </style>
 </head>
@@ -93,293 +246,130 @@ body {
 
 <div class="app">
 
+<!-- 首页 -->
+
 <div id="home" class="page active">
 
     <div class="subtitle">
-        AI PERSONAL TRAINER
+        FITAI · AI PERSONAL TRAINER
     </div>
 
     <div class="title" style="margin-top:8px;">
         今天怎么练？
     </div>
 
-    <div class="subtitle">
-        8月31日 · 周一
+    <div class="subtitle" style="margin-top:5px;">
+        周一 · 8月31日
     </div>
 
-    <div class="card" style="
-        background:linear-gradient(145deg,#20251b,#14161a);
-        border-color:#3b422c;
-    ">
+    <div class="card">
 
-        <div class="subtitle">
-            AI 今日训练
+        <div style="display:flex;justify-content:space-between;">
+            <div>
+                <div class="subtitle">今日训练</div>
+                <h2 style="margin-top:7px;">
+                    胸 + 三头
+                </h2>
+                <div class="subtitle" style="margin-top:6px;">
+                    4 个动作 · 12 组
+                </div>
+            </div>
+
+            <span class="tag">AI PLAN</span>
         </div>
 
-        <h2 style="font-size:24px;margin-top:8px;">
-            胸 + 三头
-        </h2>
-
-        <div class="subtitle" style="margin-top:6px;">
-            4 个动作 · 12 组 · 约 50 分钟
+        <div class="progress" style="margin-top:18px;">
+            <div></div>
         </div>
 
-        <div style="
-            margin-top:18px;
-            height:7px;
-            background:#292d32;
-            border-radius:20px;
-        ">
-            <div style="
-                width:25%;
-                height:100%;
-                background:#d8ff3f;
-                border-radius:20px;
-            "></div>
-        </div>
-
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            margin-top:8px;
-            font-size:12px;
-            color:#888;
-        ">
-            <span>3 / 12 组</span>
-            <span>25%</span>
+        <div class="subtitle" style="margin-top:7px;">
+            已完成 3 / 12 组
         </div>
 
         <button
-            onclick="showPage('train',document.querySelectorAll('.nav-button')[1])"
-            style="
-                width:100%;
-                margin-top:18px;
-                padding:15px;
-                border:none;
-                border-radius:15px;
-                background:#d8ff3f;
-                color:#111;
-                font-size:15px;
-                font-weight:800;
-            "
+            class="primary"
+            style="margin-top:16px;"
+            onclick="go('train')"
         >
-            继续训练
+            开始训练
         </button>
 
     </div>
 
-    <div style="
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:12px;
-        margin-top:16px;
-    ">
 
-        <div class="card" style="margin-top:0;">
+    <div class="grid2">
+
+        <div class="card">
             <div class="subtitle">本周训练</div>
-
-            <div style="
-                font-size:28px;
-                font-weight:800;
-                margin-top:8px;
-            ">
-                3
-                <span style="
-                    font-size:13px;
-                    color:#777;
-                    font-weight:400;
-                ">
-                    / 4 次
-                </span>
-            </div>
-
-            <div class="subtitle">
-                完成 75%
-            </div>
+            <div class="stat">3</div>
+            <div class="subtitle">次</div>
         </div>
 
-        <div class="card" style="margin-top:0;">
-
-            <div class="subtitle">
-                当前体重
-            </div>
-
-            <div style="
-                font-size:28px;
-                font-weight:800;
-                margin-top:8px;
-            ">
-                68.35
-            </div>
-
-            <div class="subtitle">
-                kg
-            </div>
-
+        <div class="card">
+            <div class="subtitle">当前体重</div>
+            <div class="stat">68.35</div>
+            <div class="subtitle">kg</div>
         </div>
 
     </div>
+
 
     <div class="card">
 
         <div style="
             display:flex;
             justify-content:space-between;
-            align-items:center;
         ">
 
             <div>
-                <h3>✦ AI 教练建议</h3>
+                <div class="subtitle">✦ AI 教练</div>
 
-                <div class="subtitle" style="margin-top:5px;">
-                    根据最近训练表现
-                </div>
+                <h3 style="margin-top:6px;">
+                    今天建议保持渐进超负荷
+                </h3>
             </div>
 
-            <div style="
-                background:#d8ff3f;
-                color:#111;
-                padding:7px 10px;
-                border-radius:10px;
-                font-size:11px;
-                font-weight:700;
-            ">
-                AI
-            </div>
+            <span style="font-size:25px;">✦</span>
 
         </div>
 
         <p style="
-            color:#c5c8ce;
+            color:#b5b8bf;
             font-size:14px;
             line-height:1.7;
-            margin-top:15px;
+            margin-top:12px;
         ">
-            今天卧推建议从
-            <strong style="color:white;">
-                70 kg
-            </strong>
-            开始。
-
-            如果前三组平均达到 9 次，
-            下一次可以尝试
-            <strong style="color:#d8ff3f;">
-                72.5 kg
-            </strong>。
+            根据最近训练表现，卧推建议从
+            <strong style="color:#fff;">70 kg</strong>
+            开始，目标
+            <strong class="green">6–10 次</strong>。
         </p>
 
         <button
-            onclick="showPage('ai',document.querySelectorAll('.nav-button')[3])"
-            style="
-                margin-top:12px;
-                padding:11px 15px;
-                border:1px solid #30343b;
-                background:#1c1f24;
-                color:white;
-                border-radius:12px;
-            "
+            class="secondary"
+            style="margin-top:12px;"
+            onclick="go('ai')"
         >
             和 AI 教练聊聊
         </button>
 
     </div>
 
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        margin-top:25px;
-    ">
-        <h3>最近进步</h3>
-
-        <span class="subtitle">
-            查看全部
-        </span>
-    </div>
-
-    <div class="card">
-
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        ">
-
-            <div>
-
-                <div style="
-                    font-size:16px;
-                    font-weight:700;
-                ">
-                    杠铃卧推
-                </div>
-
-                <div class="subtitle">
-                    估算 1RM
-                </div>
-
-            </div>
-
-            <div style="text-align:right;">
-
-                <div style="
-                    font-size:20px;
-                    font-weight:800;
-                    color:#d8ff3f;
-                ">
-                    80 kg
-                </div>
-
-                <div class="subtitle">
-                    ↑ 5 kg
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </div>
+
+
+<!-- 训练 -->
+
 <div id="train" class="page">
 
-    <div class="subtitle">
-        TODAY'S WORKOUT
-    </div>
+    <div class="subtitle">TODAY'S WORKOUT</div>
 
     <div class="title" style="margin-top:8px;">
         胸 + 三头
     </div>
 
     <div class="subtitle">
-        4 个动作 · 12 组 · 约 50 分钟
-    </div>
-
-    <div class="card" style="
-        background:linear-gradient(145deg,#20251b,#14161a);
-        border-color:#3b422c;
-    ">
-
-        <div class="subtitle">
-            ✦ AI 今日训练
-        </div>
-
-        <h2 style="font-size:23px;margin-top:8px;">
-            今天保持渐进超负荷
-        </h2>
-
-        <p style="
-            color:#aeb2ba;
-            font-size:14px;
-            line-height:1.7;
-            margin-top:10px;
-        ">
-            根据最近训练表现，今天建议保持
-            <strong style="color:white;">70 kg</strong>
-            卧推，并控制在
-            <strong style="color:#d8ff3f;">RIR 1–2</strong>。
-        </p>
-
+        4 个动作 · 12 组
     </div>
 
     <div class="card">
@@ -392,169 +382,549 @@ body {
             杠铃卧推
         </h2>
 
-        <div class="subtitle" style="margin-top:6px;">
-            3 组 · 6–10 次
+        <div class="subtitle" style="margin-top:5px;">
+            胸大肌 · 三头肌
         </div>
-<div style="
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:18px;
-">
 
-    <div>
-        <div class="subtitle">重量</div>
+        <div class="exercise-row">
+
+            <div>
+                <div class="subtitle">目标</div>
+                <strong>3 × 6–10</strong>
+            </div>
+
+            <div style="text-align:right;">
+                <div class="subtitle">AI 建议</div>
+                <strong class="green">70 kg</strong>
+            </div>
+
+        </div>
+
+
+        <div class="grid2" style="margin-top:15px;">
+
+            <div>
+                <div class="subtitle">重量 kg</div>
+                <input id="weight" type="number" value="70">
+            </div>
+
+            <div>
+                <div class="subtitle">次数</div>
+                <input id="reps" type="number" value="8">
+            </div>
+
+        </div>
+
+
+        <div style="margin-top:14px;">
+
+            <div class="subtitle">
+                RIR
+            </div>
+
+            <select
+                id="rir"
+                style="
+                    width:100%;
+                    margin-top:6px;
+                    padding:13px;
+                    background:#0e1013;
+                    color:white;
+                    border:1px solid #30343b;
+                    border-radius:12px;
+                "
+            >
+                <option>0</option>
+                <option selected>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4+</option>
+            </select>
+
+        </div>
+
+
+        <button
+            class="primary"
+            style="margin-top:15px;"
+            onclick="completeSet()"
+        >
+            ✓ 完成这一组
+        </button>
+
+
+        <div
+            id="setStatus"
+            style="
+                display:none;
+                margin-top:13px;
+                padding:13px;
+                background:#20251b;
+                border-radius:12px;
+                color:#d8ff3f;
+                font-size:13px;
+                line-height:1.6;
+            "
+        ></div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="subtitle">
+            后续动作
+        </div>
+
+        <div class="exercise-row">
+            <div>
+                <strong>上斜哑铃卧推</strong>
+                <div class="subtitle">3 × 8–12</div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="exercise-row">
+            <div>
+                <strong>蝴蝶机夹胸</strong>
+                <div class="subtitle">3 × 10–15</div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="exercise-row">
+            <div>
+                <strong>绳索下压</strong>
+                <div class="subtitle">3 × 10–15</div>
+            </div>
+            <span>›</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 器械 -->
+
+<div id="equipment" class="page">
+
+    <div class="subtitle">MY GYM</div>
+
+    <div class="title" style="margin-top:8px;">
+        我的器械
+    </div>
+
+    <div class="subtitle">
+        AI 只会使用这里的器械制定计划
+    </div>
+
+    <div class="card">
+
+        <div class="exercise-row">
+            <div>
+                <strong>哈克深蹲</strong>
+                <div class="subtitle">腿 · 股四头肌</div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="exercise-row">
+            <div>
+                <strong>高位下拉</strong>
+                <div class="subtitle">背 · 背阔肌</div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="exercise-row">
+            <div>
+                <strong>蝴蝶机</strong>
+                <div class="subtitle">胸 · 三角肌前束</div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <button
+            class="primary"
+            style="margin-top:15px;"
+            onclick="addEquipment()"
+        >
+            ＋ 添加器械
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- AI -->
+
+<div id="ai" class="page">
+
+    <div class="subtitle">FITAI COACH</div>
+
+    <div class="title" style="margin-top:8px;">
+        AI 教练
+    </div>
+
+    <div class="card">
+
+        <div class="tag">AI</div>
+
+        <h3 style="margin-top:12px;">
+            今天想怎么训练？
+        </h3>
+
+        <p style="
+            color:#aaa;
+            font-size:14px;
+            line-height:1.7;
+            margin-top:8px;
+        ">
+            告诉我你的时间、目标和身体状态，
+            我会帮你制定训练方案。
+        </p>
 
         <input
-            id="weight1"
-            type="number"
-            value="70"
-            style="
-                width:100%;
-                margin-top:6px;
-                padding:14px;
-                background:#0d0f12;
-                border:1px solid #30343b;
-                border-radius:12px;
-                color:white;
-                font-size:16px;
-            "
+            id="aiInput"
+            placeholder="例如：今天只有40分钟，帮我练胸"
+            style="margin-top:14px;"
         >
-    </div>
 
-    <div>
-        <div class="subtitle">次数</div>
-
-        <input
-            id="reps1"
-            type="number"
-            value="8"
-            style="
-                width:100%;
-                margin-top:6px;
-                padding:14px;
-                background:#0d0f12;
-                border:1px solid #30343b;
-                border-radius:12px;
-                color:white;
-                font-size:16px;
-            "
+        <button
+            class="primary"
+            style="margin-top:10px;"
+            onclick="askAI()"
         >
+            生成训练建议
+        </button>
+
+        <div
+            id="aiAnswer"
+            style="
+                display:none;
+                margin-top:15px;
+                padding:15px;
+                background:#1d2018;
+                border-radius:13px;
+                color:#d5d8dc;
+                line-height:1.8;
+                font-size:14px;
+            "
+        ></div>
+
     </div>
 
 </div>
 
-<button
-    onclick="finishSet()"
-    style="
-        width:100%;
-        margin-top:14px;
-        padding:15px;
-        border:none;
-        border-radius:14px;
-        background:#d8ff3f;
-        color:#111;
-        font-size:15px;
-        font-weight:800;
-    "
->
-    ✓ 完成第 1 组
-</button>
 
-<div
-    id="setResult"
-    style="
-        display:none;
-        margin-top:12px;
-        padding:13px;
-        background:#20251b;
-        border-radius:12px;
-        color:#d8ff3f;
-        font-size:13px;
-    "
-></div>
+<!-- 数据 -->
+
+<div id="data" class="page">
+
+    <div class="subtitle">PROGRESS</div>
+
+    <div class="title" style="margin-top:8px;">
+        我的数据
     </div>
 
-</div>
-    <div id="equipment" class="page">
-        <div class="title">器械库</div>
-        <div class="subtitle">管理你的健身房</div>
+    <div class="grid2">
+
+        <div class="card">
+            <div class="subtitle">训练次数</div>
+            <div class="stat">36</div>
+        </div>
+
+        <div class="card">
+            <div class="subtitle">PR</div>
+            <div class="stat green">12</div>
+        </div>
+
     </div>
 
-    <div id="ai" class="page">
-        <div class="title">AI 教练</div>
-        <div class="subtitle">你的私人训练顾问</div>
-    </div>
+    <div class="card">
 
-    <div id="data" class="page">
-        <div class="title">数据</div>
-        <div class="subtitle">记录你的长期进步</div>
-    </div>
+        <div class="subtitle">
+            最近训练量
+        </div>
 
-    <div class="bottom-nav">
+        <div style="
+            font-size:32px;
+            font-weight:800;
+            margin-top:8px;
+        ">
+            8,420
+            <span style="font-size:14px;color:#888;">
+                kg
+            </span>
+        </div>
 
-        <button class="nav-button active" onclick="showPage('home', this)">
-            <span>⌂</span>
-            首页
-        </button>
-
-        <button class="nav-button" onclick="showPage('train', this)">
-            <span>◎</span>
-            训练
-        </button>
-
-        <button class="nav-button" onclick="showPage('equipment', this)">
-            <span>▣</span>
-            器械
-        </button>
-
-        <button class="nav-button" onclick="showPage('ai', this)">
-            <span>✦</span>
-            AI
-        </button>
-
-        <button class="nav-button" onclick="showPage('data', this)">
-            <span>↗</span>
-            数据
-        </button>
+        <div class="subtitle">
+            本周总训练量
+        </div>
 
     </div>
 
 </div>
+
+
+<!-- 底部导航 -->
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-button active"
+        onclick="go('home',this)"
+    >
+        <span>⌂</span>
+        首页
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="go('train',this)"
+    >
+        <span>◎</span>
+        训练
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="go('equipment',this)"
+    >
+        <span>▣</span>
+        器械
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="go('ai',this)"
+    >
+        <span>✦</span>
+        AI
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="go('data',this)"
+    >
+        <span>↗</span>
+        数据
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- 休息计时弹窗 -->
+
+<div id="timerModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="subtitle" style="text-align:center;">
+            REST TIMER
+        </div>
+
+        <div id="timer" class="timer">
+            90
+        </div>
+
+        <button
+            class="primary"
+            onclick="closeTimer()"
+        >
+            跳过休息
+        </button>
+
+    </div>
+
+</div>
+
 
 <script>
-function finishSet() {
 
-    const weight = document.getElementById("weight1").value;
-    const reps = document.getElementById("reps1").value;
+let timerInterval = null;
 
-    if (!weight || !reps) {
-        alert("请填写重量和次数");
-        return;
-    }
 
-    const result = document.getElementById("setResult");
+function go(pageId,button){
 
-    result.style.display = "block";
-
-    result.innerHTML =
-        "✓ 第 1 组已完成<br><br>" +
-        weight + " kg × " + reps + " 次<br>" +
-        "AI：本组记录成功，可以进入下一组。";
-}
-function showPage(pageId, button) {
-
-    document.querySelectorAll(".page").forEach(function(page) {
+    document.querySelectorAll(".page")
+    .forEach(function(page){
         page.classList.remove("active");
     });
 
-    document.getElementById(pageId).classList.add("active");
+    document.getElementById(pageId)
+    .classList.add("active");
 
-    document.querySelectorAll(".nav-button").forEach(function(btn) {
-        btn.classList.remove("active");
+    if(button){
+
+        document.querySelectorAll(".nav-button")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+    }else{
+
+        const navs =
+        document.querySelectorAll(".nav-button");
+
+        navs.forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+        if(pageId==="home") navs[0].classList.add("active");
+        if(pageId==="train") navs[1].classList.add("active");
+        if(pageId==="equipment") navs[2].classList.add("active");
+        if(pageId==="ai") navs[3].classList.add("active");
+        if(pageId==="data") navs[4].classList.add("active");
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
+}
 
-    button.classList.add("active");
+
+function completeSet(){
+
+    const weight =
+        document.getElementById("weight").value;
+
+    const reps =
+        document.getElementById("reps").value;
+
+    const rir =
+        document.getElementById("rir").value;
+
+    if(!weight || !reps){
+
+        alert("请填写重量和次数");
+
+        return;
+    }
+
+    const volume =
+        Number(weight) * Number(reps);
+
+    const status =
+        document.getElementById("setStatus");
+
+    status.style.display="block";
+
+    status.innerHTML =
+        "✓ 本组已记录<br>" +
+        weight + " kg × " +
+        reps + " 次 · RIR " +
+        rir +
+        "<br><br>" +
+        "本组训练量："
+        + volume +
+        " kg";
+
+
+    startRest();
+
+}
+
+
+function startRest(){
+
+    let seconds=90;
+
+    const modal =
+        document.getElementById("timerModal");
+
+    const timer =
+        document.getElementById("timer");
+
+    modal.classList.add("show");
+
+    timer.innerText=seconds;
+
+    clearInterval(timerInterval);
+
+    timerInterval =
+    setInterval(function(){
+
+        seconds--;
+
+        timer.innerText=seconds;
+
+        if(seconds<=0){
+
+            clearInterval(timerInterval);
+
+            alert("休息结束，可以开始下一组了！");
+
+            closeTimer();
+
+        }
+
+    },1000);
+
+}
+
+
+function closeTimer(){
+
+    clearInterval(timerInterval);
+
+    document
+    .getElementById("timerModal")
+    .classList.remove("show");
+
+}
+
+
+function addEquipment(){
+
+    const name =
+        prompt("请输入器械名称");
+
+    if(!name) return;
+
+    alert(
+        name +
+        " 已加入你的器械库。"
+    );
+
+}
+
+
+function askAI(){
+
+    const input =
+        document.getElementById("aiInput").value;
+
+    const answer =
+        document.getElementById("aiAnswer");
+
+    if(!input){
+
+        alert("先告诉 AI 你的训练需求");
+
+        return;
+
+    }
+
+    answer.style.display="block";
+
+    answer.innerHTML =
+        "<strong>AI 教练建议</strong><br><br>" +
+        "根据你的描述，今天可以安排一套高效训练。<br><br>" +
+        "① 杠铃卧推 · 3 × 6–10<br>" +
+        "② 上斜哑铃卧推 · 3 × 8–12<br>" +
+        "③ 蝴蝶机夹胸 · 3 × 10–15<br>" +
+        "④ 绳索下压 · 3 × 10–15<br><br>" +
+        "建议组间休息 90 秒，并保持 RIR 1–2。";
+
 }
 
 </script>
